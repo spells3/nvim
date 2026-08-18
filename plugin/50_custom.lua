@@ -1,6 +1,23 @@
 local add = vim.pack.add
 local now_if_args, later = Config.now_if_args, Config.later
 
+-- Reclaim <Leader>g keys from 20_keymaps.lua (mini.git / mini.diff block).
+-- Those mappings are commented out in MiniMax but the xmap 'gs' is active
+-- and references MiniGit which is not set up. Delete it and pre-claim all
+-- keys this config uses so a future MiniMax update cannot override them.
+Config.now(function()
+  -- active in 20_keymaps.lua but MiniGit is not set up
+  pcall(vim.keymap.del, 'x', '<Leader>gs')
+
+  -- commented out in 20_keymaps.lua; claim them so an upstream uncomment
+  -- cannot conflict with the custom git workflow below
+  local noop = function() end
+  local keys = { 'ga', 'gA', 'gc', 'gC', 'gd', 'gD', 'go', 'gs' }
+  for _, k in ipairs(keys) do
+    vim.keymap.set('n', '<Leader>' .. k, noop, { desc = 'reserved (custom git)' })
+  end
+end)
+
 -- Tree-sitter: additional languages on top of MiniMax defaults
 now_if_args(function()
   local extra_langs = { 'yaml', 'python', 'gotmpl', 'helm' }
