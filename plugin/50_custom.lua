@@ -56,6 +56,13 @@ now_if_args(function()
   require('toggleterm').setup({})
 end)
 
+-- Markdown: in-buffer rendering (headings, code blocks, tables, checkboxes)
+later(function()
+  add({ 'https://github.com/MeanderingProgrammer/render-markdown.nvim' })
+  require('render-markdown').setup({})
+  vim.keymap.set('n', '<Leader>om', '<cmd>RenderMarkdown toggle<cr>', { desc = 'Toggle markdown render' })
+end)
+
 -- Git: file history, blame, lazygit
 vim.pack.add({
   -- diffview: просмотр истории файла по коммитам

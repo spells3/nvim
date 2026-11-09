@@ -6,7 +6,7 @@ Personal Neovim customizations layered on top of
 ## Structure
 
 ```
-plugin/50_custom.lua              — git plugins, helm, toggleterm, LSP/TS config
+plugin/50_custom.lua              — git plugins, helm, toggleterm, render-markdown, LSP/TS config
 after/lsp/helm_ls.lua             — Helm LSP config
 after/lsp/ruff.lua                — Ruff LSP config
 after/lsp/ty.lua                  — ty LSP config
